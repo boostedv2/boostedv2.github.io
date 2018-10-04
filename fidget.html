@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="stylesheet" href="css/Purification.css">
+<link rel="stylesheet" href="css/navbar.css">
+<link href='https://fonts.googleapis.com/css?family=Architects Daughter' rel='stylesheet'>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script>
+var looper;
+var degrees = 0;
+function rotateAnimation(el,speed){
+	var elem = document.getElementById(el);
+	if(navigator.userAgent.match("Chrome")){
+		elem.style.WebkitTransform = "rotate("+degrees+"deg)";
+	} else if(navigator.userAgent.match("Firefox")){
+		elem.style.MozTransform = "rotate("+degrees+"deg)";
+	} else if(navigator.userAgent.match("MSIE")){
+		elem.style.msTransform = "rotate("+degrees+"deg)";
+	} else if(navigator.userAgent.match("Opera")){
+		elem.style.OTransform = "rotate("+degrees+"deg)";
+	} else {
+		elem.style.transform = "rotate("+degrees+"deg)";
+	}
+	looper = setTimeout('rotateAnimation(\''+el+'\','+speed+')',speed);
+	degrees++;
+	if(degrees > 359){
+		degrees = 1;
+	}
+}
+</script>
+</head>
+<body>
+
+<nav class="nav-collapse" role="navigation">
+    <ul class="tabs primary-nav">
+        <li class="tabs__item">
+            <a href="index.html" class="tabs__link">Home</a>
+        </li>
+        <li class="tabs__item">
+            <a href="eskeetit.html" class="tabs__link">Eskeetit</a>
+        </li>
+        <li class="tabs__item">
+            <a href="ethereum.html" class="tabs__link">Ethereum</a>
+        </li>
+        <li class="tabs__item">
+            <a href="fidget.html" class="tabs__link">Fidget</a>
+        </li>
+        <li class="tabs__item">
+            <a href="purification.html" class="tabs__link">Purification</a>
+        </li>
+    </ul>
+</nav>
+<center>
+<img id="img1" src="fidget.png" alt="cog1">
+<script>rotateAnimation("img1",0.05);</script>
+<h2 style="width:150px;" id="status"></h2>
+
+</body>
+</html>

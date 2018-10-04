@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="css/navbar.css">
+    <!-- JQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
+    <!-- My CSS -->
+    <link rel="stylesheet" href="css/main.css">
+    <!-- Roboto font -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Architects Daughter' rel='stylesheet'>
+</head>
+
+<script>
+    function CurrentTime() {
+        // Current time
+        var currentDate = new Date();
+        // Make it pretty
+        var amPm = ' am'
+        var hour = currentDate.getHours();
+        if (hour > 12) {
+            hour -= 12;
+            amPm = ' pm';
+        }
+        var min = currentDate.getMinutes();
+        if (min < 10)
+            min = '0' + min;
+        var sec = currentDate.getSeconds();
+        if (sec < 10)
+            sec = '0' + sec;
+
+        return hour + ':' + min + ':' + sec + amPm;
+    }
+
+    // Display the current price and time it was received
+    function GetEthPriceReturn(data) {
+        // Show ethereum price
+        $('#ethPrice').text('$' + data.USD.toFixed(2));
+
+        $('#lastUpdated').text('Last updated: ' + CurrentTime());
+    }
+
+    // Download the current price
+    function GetEthPrice() {
+        jQuery.get('https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=USD',
+            null,
+            function (data) { GetEthPriceReturn(data); },
+            null);
+    }
+    // Call once to initialize data...
+    setInterval(GetEthPrice, 1);
+
+</script>
+
+<body>
+<nav class="nav-collapse" role="navigation">
+    <ul class="tabs primary-nav">
+        <li class="tabs__item">
+            <a href="index.html" class="tabs__link">Home</a>
+        </li>
+        <li class="tabs__item">
+            <a href="eskeetit.html" class="tabs__link">Eskeetit</a>
+        </li>
+        <li class="tabs__item">
+            <a href="ethereum.html" class="tabs__link">Ethereum</a>
+        </li>
+        <li class="tabs__item">
+            <a href="fidget.html" class="tabs__link">Fidget</a>
+        </li>
+        <li class="tabs__item">
+            <a href="purification.html" class="tabs__link">Purification</a>
+        </li>
+    </ul>
+</nav>
+<h1 style="color red"> Ethereum Prices </h1>
+    <div class='container'>
+        <div class='row'>
+           
+        </div>
+        <div class='row'>
+            <!-- Current price -->
+            <div style="color: red" id='ethPrice'>No data</div>
+        </div>
+        <div class='row'>
+            <!-- Last updated -->
+            <div style="color: red" id='lastUpdated'>Last updated: never</div>
+        </div>
+    </div>
+</body>
+
+</html>
